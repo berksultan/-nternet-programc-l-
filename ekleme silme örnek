@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input, Ekle, Sil ve Temizle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            padding: 10px;
+            width: 200px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        button#add {
+            background-color: #4CAF50;
+        }
+
+        button#delete {
+            background-color: #f44336;
+        }
+
+        button#clear {
+            background-color: #2196F3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background: #eee;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        li.selected {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Liste Yönetimi</h1>
+        <input type="text" id="inputField" placeholder="Bir şey yazın">
+        <button id="add">Ekle</button>
+        <button id="delete">Sil</button>
+        <button id="clear">Temizle</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        const inputField = document.getElementById('inputField');
+        const addButton = document.getElementById('add');
+        const deleteButton = document.getElementById('delete');
+        const clearButton = document.getElementById('clear');
+        const list = document.getElementById('list');
+
+        // Listeye yeni eleman ekle
+        addButton.addEventListener('click', () => {
+            const value = inputField.value.trim();
+            if (value) {
+                const listItem = document.createElement('li');
+                listItem.textContent = value;
+
+                // Liste elemanına tıklayınca seçili yap
+                listItem.addEventListener('click', () => {
+                    const selected = document.querySelector('.selected');
+                    if (selected) selected.classList.remove('selected');
+                    listItem.classList.add('selected');
+                });
+
+                list.appendChild(listItem);
+                inputField.value = '';
+            } else {
+                alert('Lütfen bir şey yazın!');
+            }
+        });
+
+        // Seçili elemanı sil
+        deleteButton.addEventListener('click', () => {
+            const selected = document.querySelector('.selected');
+            if (selected) {
+                list.removeChild(selected);
+            } else {
+                alert('Silmek için bir eleman seçin!');
+            }
+        });
+
+        // Tüm listeyi temizle
+        clearButton.addEventListener('click', () => {
+            list.innerHTML = '';
+        });
+    </script>
+</body>
+</html>
