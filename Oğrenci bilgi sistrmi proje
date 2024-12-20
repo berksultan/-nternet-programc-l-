@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Bilgi Sistemi</title>
+    <link rel="stylesheet" href="style.css">
+    <a class="icon-link" href="#">
+        <svg class="bi" aria-hidden="true"><use xlink:href="#box-seam"></use></svg>
+      </a>
+    <style>
+      
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('imag/JPG.jpg')   ;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .header-title {
+            position: absolute;
+            top: 0;
+             left:0;
+            font-size: 35px;
+             color: rgb(235, 231, 231);
+            text-align: right;
+            text-transform: uppercase;
+        }
+        .center-menu {
+          position: absolute;
+         top: 0%;
+         right: 0px;
+         transform: translate(-50%, -50%);
+         list-style-type: none;
+          display: flex;
+         flex-direction: row;
+         gap: 20px; 
+          font-size: 20px;
+         color: rgb(255, 246, 246);
+         text-transform: 0; 
+         padding: 10;
+            margin: 10;
+            text-align: right;
+        }
+         .center-menu li {
+           cursor: pointer;
+        }
+
+         .login-container {
+            background: rgba(79, 78, 78, 0.9);
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 400px;
+            width: 200%;
+            text-align: center;
+        }
+        .login-container h1 {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+          
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header-title">İnternational İ-T University</h1>
+    
+   
+    <ul class="center-menu">
+        <li>Duyurular</li>
+        <li>Akademik </li>
+        <li>About</li>
+    </ul>
+   
+    <div class="login-container">
+        <h2>Öğrenci Giriş</h2>
+      
+        <form id="loginForm">
+            <input type="text" id="studentNumber" placeholder="Öğrenci Numarasi" required />
+            <input type="password" id="password" placeholder="Şifre" required />
+            <button type="submit">Giriş Yap</button>
+        </form>
+        <div class="footer">Bu sistem yalnizca yetkilendirilmiş kullanicilar içindir.</div>
+    </div>
+    <script>
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const studentNumber = document.getElementById('studentNumber').value;
+            const password = document.getElementById('password').value;
+
+            if (studentNumber === "123456" && password === "password") {
+                alert("Giriş başarili!");
+                window.location.href = "dashboard.html"; // Yeni sayfaya yönlendirme
+            } else {
+                alert("Hatali öğrenci numarasi veya şifre!");
+            }
+        });
+    </script>
+</body>
+</html>
+ 2 Cİ SAYFA
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+        }
+
+        .logout {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            text-align: center;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .logout:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        Öğrenci Bilgi Sistemi
+    </div>
+
+    <div class="content">
+        <div class="card">
+            <h3>Hoş geldin, [Beksultan Babaev]</h3>
+            <p>Öğrenci Numaraniz: [Öğrenci No]</p>
+        </div>
+
+        <div class="card">
+            <h3>Kayitli Dersleriniz</h3>
+            <ul>
+                <li>Matematik 101 - Öğr. Gör. Ahmet Kaya</li>
+                <li>Fizik 102 - Dr. Mehmet Arslan</li>
+                <li>Kimya 103 - Prof. Dr. Zeynep Yilmaz</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Duyurular</h3>
+            <p>Yeni dönem ders kayitlari 25 Aralik 2024 tarihinde başlayacaktir.</p>
+        </div>
+
+        <a href="index.html" class="logout">Çikiş Yap</a>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>
