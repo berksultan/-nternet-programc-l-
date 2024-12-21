@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Bilgi Sistemi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(177, 254, 254);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-info span {
+            margin-right: 10px;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            color: white;
+            overflow-y: auto;
+            transition: left 0.3s;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar ul li a i {
+            margin-right: 10px;
+        }
+
+        .sidebar ul li ul {
+            list-style: none;
+            padding-left: 15px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .sidebar ul li ul li {
+            margin: 5px 0;
+        }
+
+        .sidebar ul li ul li a {
+            font-size: 14px;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+        }
+
+        .form-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="menu-icon" onclick="toggleMenu()">
+        <span>☰</span>
+    </div>
+    <h1>INTERNATIONAL IT UNIVERSITY</h1>
+    <div class="profile-info">
+        <span>12345678</span>
+        <span>Beksultan Babaev</span>
+        <i class="bi bi-bell-fill fs-4 me-3"></i>
+        <i class="bi bi-person-circle fs-4"></i>
+    </div>
+</header>
+
+<nav id="sidebar" class="sidebar">
+    <h2>İİTU</h2>
+    <ul>
+        <li>
+            <a onclick="toggleSubmenu('genel')"><i class="bi bi-house"></i>Genel İşlemler</a>
+            <ul id="genel">
+                <li><a onclick="showForm('genelBilgilerForm')"><i class="bi bi-info-circle"></i>Genel Bilgiler</a></li>
+                <li><a onclick="showForm('danismanBilgilerForm')"><i class="bi bi-person-lines-fill"></i>Danışman Bilgileri</a></li>
+                <li><a onclick="showForm('alinanDerslerForm')"><i class="bi bi-book"></i>Alınan Dersler</a></li>
+                <li><a onclick="showForm('dersProgramiForm')"><i class="bi bi-calendar"></i>Ders Programı</a></li>
+                <li><a onclick="showForm('sinavTakvimiForm')"><i class="bi bi-clock"></i>Sınav Takvimi</a></li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="toggleSubmenu('ders')"><i class="bi bi-journal"></i>Ders ve Dönem İşlemleri</a>
+            <ul id="ders">
+                <li><a onclick="showForm('dersKayitForm')"><i class="bi bi-pencil-square"></i>Ders Kayıt</a></li>
+                <li><a onclick="showForm('notListesiForm')"><i class="bi bi-card-list"></i>Not Listesi</a></li>
+                <li><a onclick="showForm('devamsizlikDurumuForm')"><i class="bi bi-emoji-frown"></i>Devamsızlık Durumu</a></li>
+                <li><a onclick="showForm('digerBelgelerForm')"><i class="bi bi-file-earmark"></i>Diğer Belgeler</a></li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="toggleSubmenu('form')"><i class="bi bi-ui-checks"></i>Form İşlemleri</a>
+            <ul id="form">
+                <li><a onclick="showForm('anketlerForm')"><i class="bi bi-bar-chart"></i>Anketler</a></li>
+                <li><a onclick="showForm('degerlendirmeFormlariForm')"><i class="bi bi-list-check"></i>Değerlendirme Formları</a></li>
+                <li><a onclick="showForm('ogrenciBilgiFormuForm')"><i class="bi bi-person-badge"></i>Öğrenci Bilgi Formu</a></li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="toggleSubmenu('basvuru')"><i class="bi bi-box-arrow-in-right"></i>Başvuru İşlemleri</a>
+            <ul id="basvuru">
+                <li><a onclick="showForm('kayitDondurmaForm')"><i class="bi bi-calendar-x"></i>Kayıt Dondurma</a></li>
+                <li><a onclick="showForm('mazeretSinaviForm')"><i class="bi bi-pencil"></i>Mazeret Sınavı Başvuru</a></li>
+                <li><a onclick="showForm('tekDersForm')"><i class="bi bi-file-text"></i>Tek Ders Başvuru</a></li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="toggleSubmenu('staj')"><i class="bi bi-briefcase"></i>Staj İşlemleri</a>
+            <ul id="staj">
+                <li><a onclick="showForm('ogrenciStajForm')"><i class="bi bi-building"></i>Öğrenci Staj İşlemleri</a></li>
+            </ul>
+        </li>
+        <li>
+            <a onclick="toggleSubmenu('kullanici')"><i class="bi bi-person"></i>Kullanıcı İşlemleri</a>
+            <ul id="kullanici">
+                <li><a onclick="showForm('gelenMesajlarForm')"><i class="bi bi-envelope"></i>Gelen Mesajlar</a></li>
+                <li><a onclick="showForm('belgeTalebiForm')"><i class="bi bi-file-earmark-plus"></i>Belge Talebi</a></li>
+                <li><a onclick="showForm('sifreDegistirmeForm')"><i class="bi bi-shield-lock"></i>Şifre Değiştirme</a></li>
+                <li><a onclick="showForm('fotografGuncellemeForm')"><i class="bi bi-camera"></i>Fotoğraf Güncelleme</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<div class="content">
+    <div id="genelBilgilerForm" class="form-container">
+        <h2>Genel Bilgiler</h2>
+        <p>Bu alan, genel bilgiler formunu içerir.</p>
+    </div>
+
+    <div id="danismanBilgilerForm" class="form-container">
+        <h2>Danışman Bilgileri</h2>
+        <p>Bu alan, danışman bilgileri formunu içerir.</p>
+    </div>
+
+    <div id="alinanDerslerForm" class="form-container">
+        <h2>Alınan Dersler</h2>
+        <p>Bu alan, alınan dersler formunu içerir.</p>
+    </div>
+
+    <div id="dersProgramiForm" class="form-container">
+        <h2>Ders Programı</h2>
+        <p>Bu alan, ders programı formunu içerir.</p>
+    </div>
+
+    <div id="sinavTakvimiForm" class="form-container">
+        <h2>Sınav Takvimi</h2>
+        <p>Bu alan, sınav takvimi formunu içerir.</p>
+    </div>
+
+    <!-- Diğer form içerikleri buraya eklenecek -->
+</div>
+
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.style.left = sidebar.style.left === "0px" ? "-250px" : "0px";
+    }
+
+    function toggleSubmenu(id) {
+        const submenu = document.getElementById(id);
+        const isVisible = submenu.style.display === "block";
+        submenu.style.display = isVisible ? "none" : "block";
+    }
+
+    function showForm(formId) {
+        const forms = document.querySelectorAll(".form-container");
+        forms.forEach(form => form.style.display = "none");
+
+        const activeForm = document.getElementById(formId);
+        if (activeForm) {
+            activeForm.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
